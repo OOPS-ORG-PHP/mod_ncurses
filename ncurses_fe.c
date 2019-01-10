@@ -123,7 +123,9 @@ zend_function_entry ncurses_functions[] = {
 	PHP_FE(ncurses_savetty,			NULL)
 	PHP_FE(ncurses_termattrs,		NULL)
 	PHP_FE(ncurses_use_default_colors,	NULL)
+#ifdef HAVE_NCURSES_SLK_ATTR
 	PHP_FE(ncurses_slk_attr,		NULL)
+#endif
 	PHP_FE(ncurses_slk_clear,		NULL)
 	PHP_FE(ncurses_slk_noutrefresh,		NULL)
 	PHP_FE(ncurses_slk_refresh,		NULL)
@@ -191,7 +193,9 @@ zend_function_entry ncurses_functions[] = {
 #ifdef HAVE_NCURSES_ASSUME_DEFAULT_COLORS
 	PHP_FE(ncurses_assume_default_colors,	NULL)
 #endif
+#ifdef HAVE_NCURSES_DEFINE_KEY
 	PHP_FE(ncurses_define_key,	NULL)
+#endif
 	PHP_FE(ncurses_hline,		NULL)
 	PHP_FE(ncurses_vline,		NULL)
 	PHP_FE(ncurses_keyok,		NULL)
@@ -205,6 +209,10 @@ zend_function_entry ncurses_functions[] = {
 	PHP_FE(ncurses_waddstr,		NULL)
 	PHP_FE(ncurses_wnoutrefresh,	NULL)
 	PHP_FE(ncurses_wclear,		NULL)
+	PHP_FE(ncurses_wscrl,			NULL)
+	PHP_FE(ncurses_wsetscrreg, 		NULL)
+	PHP_FE(ncurses_scrollok, 		NULL)
+
 #ifdef HAVE_NCURSES_COLOR_SET
 	PHP_FE(ncurses_wcolor_set,	NULL)
 #endif

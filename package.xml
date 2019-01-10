@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.9.0" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+http://pear.php.net/dtd/tasks-1.0.xsd
+http://pear.php.net/dtd/package-2.0
+http://pear.php.net/dtd/package-2.0.xsd">
+ <name>ncurses</name>
+ <channel>pecl.php.net</channel>
+ <summary>Terminal screen handling and optimization package</summary>
+ <description>ncurses (new curses) is a free software emulation of curses in 
+System V Rel 4.0 (and above). It uses terminfo format, supports 
+pads, colors, multiple highlights, form characters and function 
+key mapping. Because of the interactive nature of this library, 
+it will be of little use for writing Web applications, but may 
+be useful when writing scripts meant using PHP from the command 
+line.
+
+See also http://www.gnu.org/software/ncurses/ncurses.html
+ 
+ </description>
+ <lead>
+  <name>Hartmut Holzgraefe</name>
+  <user>hholzgra</user>
+  <email>hartmut@php.net</email>
+  <active>yes</active>
+ </lead>
+ <developer>
+  <name>Georg Richter</name>
+  <user>georg</user>
+  <email>georg@php.net</email>
+  <active>yes</active>
+ </developer>
+ <developer>
+  <name>Ilia Alshanetsky</name>
+  <user>iliaa</user>
+  <email>iliaa@php.net</email>
+  <active>yes</active>
+ </developer>
+ <developer>
+  <name>Wez Furlong</name>
+  <user>wez</user>
+  <email>wez@php.net</email>
+  <active>yes</active>
+ </developer>
+ <developer>
+  <name>Rasmus Lerdorf</name>
+  <user>rasmus</user>
+  <email>rasmus@php.net</email>
+  <active>yes</active>
+ </developer>
+ <date>2012-06-16</date>
+ <time>14:04:00</time>
+ <version>
+  <release>1.0.2</release>
+  <api>1.0.0</api>
+ </version>
+ <stability>
+  <release>stable</release>
+  <api>stable</api>
+ </stability>
+ <license uri="http://www.php.net/license">PHP</license>
+ <notes>
+- Fixed build on PHP 5.3+
+- Fixed bug #60853 (Missing NCURSES_KEY_HOME constant)
+ </notes>
+ <contents>
+  <dir name="/">
+   <dir name="tests">
+    <file name="001.phpt" role="test" />
+   </dir> <!-- //tests -->
+   <file name="config.m4" role="src" />
+   <file name="config.w32" role="src" />
+   <file name="CREDITS" role="doc" />
+   <file name="LICENSE" role="doc" />
+   <file name="example1.php" role="doc" />
+   <file name="ncurses.c" role="src" />
+   <file name="ncurses.php" role="src" />
+   <file name="ncurses_fe.c" role="src" />
+   <file name="ncurses_functions.c" role="src" />
+   <file name="php_ncurses.h" role="src" />
+   <file name="php_ncurses_fe.h" role="src" />
+  </dir> <!-- / -->
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>5</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.0b1</min>
+   </pearinstaller>
+  </required>
+ </dependencies>
+ <providesextension>ncurses</providesextension>
+ <extsrcrelease>
+  <configureoption default="autodetect" name="enable-ncursesw" prompt="enable support for wide chars?" />
+  <configureoption default="autodetect" name="with-ncurses" prompt="path to ncurses installation?" />
+ </extsrcrelease>
+ <changelog>
+  <release>
+   <version>
+    <release>1.0.1</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2009-12-17</date>
+   <license uri="http://www.php.net/license">PHP</license>
+   <notes>
+Add --enable-ncursesw configure switch for optional wide char support
+   </notes>
+  </release>
+ </changelog>
+</package>

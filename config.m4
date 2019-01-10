@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4 292263 2009-12-17 18:42:59Z rasmus $
+dnl $Id: config.m4 340051 2016-09-18 19:40:29Z ab $
 dnl
 
 AC_MSG_CHECKING(whether we should enable wide char support)
@@ -76,8 +76,10 @@ if test "$PHP_NCURSES" != "no"; then
  
    AC_CHECK_LIB($LIBNAME, color_set,   [AC_DEFINE(HAVE_NCURSES_COLOR_SET,  1, [ ])])
    AC_CHECK_LIB($LIBNAME, slk_color,   [AC_DEFINE(HAVE_NCURSES_SLK_COLOR,  1, [ ])])
+   AC_CHECK_LIB($LIBNAME, slk_attr,   [AC_DEFINE(HAVE_NCURSES_SLK_ATTR,  1, [ ])])
    AC_CHECK_LIB($LIBNAME, assume_default_colors,   [AC_DEFINE(HAVE_NCURSES_ASSUME_DEFAULT_COLORS,  1, [ ])])
    AC_CHECK_LIB($LIBNAME, use_extended_names,   [AC_DEFINE(HAVE_NCURSES_USE_EXTENDED_NAMES,  1, [ ])])
+   AC_CHECK_LIB($LIBNAME, define_key,   [AC_DEFINE(HAVE_NCURSES_DEFINE_KEY,  1, [ ])])
 
    PHP_NEW_EXTENSION(ncurses, ncurses.c ncurses_fe.c ncurses_functions.c, $ext_shared, cli)
    PHP_SUBST(NCURSES_SHARED_LIBADD)

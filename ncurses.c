@@ -33,7 +33,11 @@ int le_ncurses_windows;
 int le_ncurses_panels;
 #endif
 
+#if PHP_MAJOR_VERSION >= 7
+static void ncurses_destruct_window(zend_resource *rsrc)
+#else
 static void ncurses_destruct_window(zend_rsrc_list_entry *rsrc TSRMLS_DC)
+#endif
 {
 	WINDOW **pwin = (WINDOW **)rsrc->ptr;
 
@@ -42,7 +46,11 @@ static void ncurses_destruct_window(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 }
 
 #if HAVE_NCURSES_PANEL
+#if PHP_MAJOR_VERSION >= 7
+static void ncurses_destruct_panel(zend_resource *rsrc)
+#else
 static void ncurses_destruct_panel(zend_rsrc_list_entry *rsrc TSRMLS_DC)
+#endif
 {
 	PANEL **ppanel = (PANEL **)rsrc->ptr;
 
@@ -271,7 +279,17 @@ PHP_MINFO_FUNCTION(ncurses)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "ncurses support", "enabled");
+#ifndef PHP_WIN32
 	php_info_print_table_row(2, "ncurses library version", NCURSES_VERSION);
+#else
+	do {
+		char tmp[8];
+
+		snprintf(tmp, sizeof(tmp), "%d", PDC_BUILD);
+
+		php_info_print_table_row(2, "PDCurses library version", tmp);
+	} while(0);
+#endif
 #ifdef HAVE_NCURSES_COLOR_SET
 		php_info_print_table_row(2, "color support", "yes");
 #else

@@ -1,0 +1,20 @@
+// $Id$
+// vim:ft=javascript
+
+ARG_WITH("ncurses", "ncurses support", "no");
+
+if (PHP_NCURSES != "no") {
+	if (CHECK_LIB("pdcurses_a.lib;pdcurses.lib", "ncurses", PHP_NCURSES) &&
+			CHECK_HEADER_ADD_INCLUDE("curses.h", "CFLAGS_NCURSES")) {
+		EXTENSION("ncurses", "ncurses.c ncurses_fe.c ncurses_functions.c");
+
+		AC_DEFINE('HAVE_PDCURSESLIB', 1, 'Have PDCurses library');
+		AC_DEFINE('HAVE_NCURSES_SLK_COLOR', 1, '');
+		AC_DEFINE('HAVE_NCURSES_COLOR_SET', 1, '');
+		AC_DEFINE('HAVE_NCURSES_PANEL', 1, '');
+
+		ADD_FLAG("CFLAGS_NCURSES", "/D NCURSES_MOUSE_VERSION=1");
+	} else {
+		WARNING("ncurses not enabled; libraries and headers not found");
+	}
+}

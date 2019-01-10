@@ -158,6 +158,9 @@ PHP_FUNCTION(ncurses_newpad);
 PHP_FUNCTION(ncurses_prefresh);
 PHP_FUNCTION(ncurses_pnoutrefresh);
 
+PHP_FUNCTION(ncurses_wscrl);
+PHP_FUNCTION(ncurses_wsetscrreg);
+PHP_FUNCTION(ncurses_scrollok);
 PHP_FUNCTION(ncurses_wstandout);
 PHP_FUNCTION(ncurses_wstandend);
 PHP_FUNCTION(ncurses_wattrset);
