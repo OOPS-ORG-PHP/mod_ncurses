@@ -163,15 +163,24 @@ PHP_FUNCTION(ncurses_init)
 		*pscr = stdscr;
 		zscr = zend_register_resource(pscr, le_ncurses_windows);
 		ZVAL_RES(&c.value, zscr);
+#if PHP_VERSION_ID < 70300
 		c.flags = CONST_CS;
+#endif
 		c.name = zend_string_init("STDSCR", sizeof("STDSCR")-1, 0);
 		zend_register_constant(&c);
 
+#if PHP_VERSION_ID < 70300
 #define PHP_NCURSES_DEF_CONST(x)    \
 		ZVAL_LONG(&c.value, x);         \
 		c.flags = CONST_CS;         \
 		c.name = zend_string_init("NCURSES_" #x, sizeof("NCURSES_" #x)-1, 0); \
 		zend_register_constant(&c)
+#else
+#define PHP_NCURSES_DEF_CONST(x)    \
+		ZVAL_LONG(&c.value, x);         \
+		c.name = zend_string_init("NCURSES_" #x, sizeof("NCURSES_" #x)-1, 0); \
+		zend_register_constant(&c)
+#endif
 #else
 		zval *zscr;
 
@@ -2667,11 +2676,18 @@ PHP_FUNCTION(ncurses_panel_above)
 
 	if (above) {
 #if PHP_MAJOR_VERSION >= 7
+#if PHP_VERSION_ID < 70300
 		zend_resource *id = (zend_resource *)panel_userptr(above);
 		GC_REFCOUNT(id)++;
 		RETURN_RES(id);
 #else
 		long id = (long)panel_userptr(above);
+		zval *zid;
+		ZVAL_LONG(zid, id);
+		Z_ADDREF_P(zid);
+		RETURN_RES(Z_RES_P(zid));
+#endif
+#else
 		zend_list_addref(id);
 		RETURN_RESOURCE(id);
 #endif
@@ -2701,9 +2717,17 @@ PHP_FUNCTION(ncurses_panel_below)
 	}
 	if (below) {
 #if PHP_MAJOR_VERSION >= 7
+#if PHP_VERSION_ID < 70300
 		zend_resource *id = (zend_resource *)panel_userptr(below);
 		GC_REFCOUNT(id)++;
 		RETURN_RES(id);
+#else
+		long id = (long)panel_userptr(below);
+		zval *zid;
+		ZVAL_LONG(zid, id);
+		Z_ADDREF_P(zid);
+		RETURN_RES(Z_RES_P(zid));
+#endif
 #else
 		long id = (long)panel_userptr(below);
 		zend_list_addref(id);
