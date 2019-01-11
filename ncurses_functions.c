@@ -2676,18 +2676,15 @@ PHP_FUNCTION(ncurses_panel_above)
 
 	if (above) {
 #if PHP_MAJOR_VERSION >= 7
-#if PHP_VERSION_ID < 70300
 		zend_resource *id = (zend_resource *)panel_userptr(above);
+#if PHP_VERSION_ID < 70300
 		GC_REFCOUNT(id)++;
+#else
+		GC_ADDREF(id);
+#endif
 		RETURN_RES(id);
 #else
 		long id = (long)panel_userptr(above);
-		zval *zid;
-		ZVAL_LONG(zid, id);
-		Z_ADDREF_P(zid);
-		RETURN_RES(Z_RES_P(zid));
-#endif
-#else
 		zend_list_addref(id);
 		RETURN_RESOURCE(id);
 #endif
@@ -2717,17 +2714,13 @@ PHP_FUNCTION(ncurses_panel_below)
 	}
 	if (below) {
 #if PHP_MAJOR_VERSION >= 7
-#if PHP_VERSION_ID < 70300
 		zend_resource *id = (zend_resource *)panel_userptr(below);
+#if PHP_VERSION_ID < 70300
 		GC_REFCOUNT(id)++;
-		RETURN_RES(id);
 #else
-		long id = (long)panel_userptr(below);
-		zval *zid;
-		ZVAL_LONG(zid, id);
-		Z_ADDREF_P(zid);
-		RETURN_RES(Z_RES_P(zid));
+		GC_ADDREF(id);
 #endif
+		RETURN_RES(id);
 #else
 		long id = (long)panel_userptr(below);
 		zend_list_addref(id);
