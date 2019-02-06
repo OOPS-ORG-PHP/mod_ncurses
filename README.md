@@ -11,3 +11,7 @@ little use for writing Web applications, but may be useful when writing scripts 
 This repository was started to support the use of ___PECL ncurses___, which ~~has been deprecated~~,
 in ___PHP 7 and later versions___. Therefore, the development direction of this extension is ___only
 to provide support for the upper version of PHP___.
+
+## Version release
+
+There is no version release. Take a look at the commit log and download the latest revision of master.
