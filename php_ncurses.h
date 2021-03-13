@@ -71,7 +71,13 @@ ZEND_END_MODULE_GLOBALS(ncurses)
 #endif
 
 ZEND_EXTERN_MODULE_GLOBALS(ncurses)
-	
+
+#if PHP_VERSION_ID >= 80000
+#define ZEND_ARG_PASS_INFO(pass_by_ref) ZEND_ARG_INFO(pass_by_ref, NULL)
+#define TSRMLS_DC
+#define TSRMLS_CC
+#endif
+
 #endif  /* PHP_NCURSES_H */
 
 

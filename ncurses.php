@@ -1,4 +1,4 @@
-<?
+<?php
 $module = 'ncurses';
 $function = 'confirm_' . $module . '_compiled';
 if (extension_loaded($module)) {
