@@ -56,8 +56,8 @@ case "${mode}" in
 		if [[ -f tests/${3}.php ]]; then
 			/usr/bin/php${2} -d "extension_dir=./modules/" -d "extension=ncurses.so" tests/${3}.php
 			exit $?
-		elif [[ -f ${3}.php ]]; then
-			/usr/bin/php${2} -d "extension_dir=./modules/" -d "extension=ncurses.so" ${3}.php
+		elif [[ -f ${3} ]]; then
+			/usr/bin/php${2} -d "extension_dir=./modules/" -d "extension=ncurses.so" ${3}
 			exit $?
 		fi
 
