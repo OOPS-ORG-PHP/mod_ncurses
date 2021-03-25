@@ -327,7 +327,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ncurses_mvhline, 0, 4, IS_LONG, 
 	ZEND_ARG_TYPE_INFO(0, n, IS_LONG, 0)
 ZEND_END_ARG_INFO()
 
-//#define arginfo_ncurses_mvvline arginfo_ncurses_mvhline
+#define arginfo_ncurses_mvvline arginfo_ncurses_mvhline
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ncurses_mvcur, 0, 4, IS_LONG, 0)
 	ZEND_ARG_TYPE_INFO(0, old_y, IS_LONG, 0)
@@ -669,7 +669,7 @@ static const zend_function_entry ncurses_functions[] = {
 	ZEND_FE(ncurses_insstr, arginfo_ncurses_insstr)
 	ZEND_FE(ncurses_instr, arginfo_ncurses_instr)
 	ZEND_FE(ncurses_mvhline, arginfo_ncurses_mvhline)
-	//ZEND_FE(ncurses_mvvline, arginfo_ncurses_mvvline)
+	ZEND_FE(ncurses_mvvline, arginfo_ncurses_mvvline)
 	ZEND_FE(ncurses_mvcur, arginfo_ncurses_mvcur)
 	ZEND_FE(ncurses_init_color, arginfo_ncurses_init_color)
 	ZEND_FE(ncurses_color_content, arginfo_ncurses_color_content)

@@ -131,6 +131,7 @@ PHP_FUNCTION(ncurses_mvwaddstr);
 PHP_FUNCTION(ncurses_insstr);
 PHP_FUNCTION(ncurses_instr);
 PHP_FUNCTION(ncurses_mvhline);
+PHP_FUNCTION(ncurses_mvvline);
 PHP_FUNCTION(ncurses_mvcur);
 PHP_FUNCTION(ncurses_init_color);
 PHP_FUNCTION(ncurses_border);
