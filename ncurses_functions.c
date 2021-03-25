@@ -2049,7 +2049,7 @@ PHP_FUNCTION(ncurses_getmouse)
 #else
 #define FMT "z"
 #endif
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z", &arg) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, FMT, &arg) == FAILURE) {
 		return;
 	}
 	IS_NCURSES_INITIALIZED();
