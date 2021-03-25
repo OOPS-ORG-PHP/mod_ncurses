@@ -38,7 +38,11 @@ extern int le_ncurses_panels;
 extern zend_module_entry ncurses_module_entry;
 #define phpext_ncurses_ptr &ncurses_module_entry
 
+#if PHP_VERSION_ID >= 80000
+static const zend_function_entry ncurses_functions[];
+#else
 extern zend_function_entry ncurses_functions[];
+#endif
 #include "php_ncurses_fe.h"
 
 #ifdef PHP_WIN32
@@ -73,7 +77,6 @@ ZEND_END_MODULE_GLOBALS(ncurses)
 ZEND_EXTERN_MODULE_GLOBALS(ncurses)
 
 #if PHP_VERSION_ID >= 80000
-#define ZEND_ARG_PASS_INFO(pass_by_ref) ZEND_ARG_INFO(pass_by_ref, NULL)
 #define TSRMLS_DC
 #define TSRMLS_CC
 #endif
