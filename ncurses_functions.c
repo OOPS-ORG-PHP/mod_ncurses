@@ -163,24 +163,17 @@ PHP_FUNCTION(ncurses_init)
 		*pscr = stdscr;
 		zscr = zend_register_resource(pscr, le_ncurses_windows);
 		ZVAL_RES(&c.value, zscr);
-#if PHP_VERSION_ID < 70300
+#if PHP_VERSION_ID >= 70300
+		int module_number = ZEND_CONSTANT_MODULE_NUMBER(&c);
+		ZEND_CONSTANT_SET_FLAGS(&c, CONST_CS, module_number);
+#else
+		int module_number = c.module_number;
 		c.flags = CONST_CS;
 #endif
 		c.name = zend_string_init("STDSCR", sizeof("STDSCR")-1, 0);
 		zend_register_constant(&c);
 
-#if PHP_VERSION_ID < 70300
-#define PHP_NCURSES_DEF_CONST(x)    \
-		ZVAL_LONG(&c.value, x);         \
-		c.flags = CONST_CS;         \
-		c.name = zend_string_init("NCURSES_" #x, sizeof("NCURSES_" #x)-1, 0); \
-		zend_register_constant(&c)
-#else
-#define PHP_NCURSES_DEF_CONST(x)    \
-		ZVAL_LONG(&c.value, x);         \
-		c.name = zend_string_init("NCURSES_" #x, sizeof("NCURSES_" #x)-1, 0); \
-		zend_register_constant(&c)
-#endif
+#define PHP_NCURSES_DEF_CONST(x)  REGISTER_LONG_CONSTANT("NCURSES_"#x, x, CONST_CS)
 #else
 		zval *zscr;
 
