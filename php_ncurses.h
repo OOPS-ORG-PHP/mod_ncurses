@@ -57,6 +57,7 @@ PHP_MINFO_FUNCTION(ncurses);
 
 ZEND_BEGIN_MODULE_GLOBALS(ncurses)
 	int	  registered_constants;
+	int   module_number;
 ZEND_END_MODULE_GLOBALS(ncurses)
 
 /* In every function that needs to use variables in php_ncurses_globals,

@@ -67,7 +67,7 @@ case "${mode}" in
 		if (( $2 > 71 )); then
 			PHP_OPT+=" -d 'extension_dir=./modules/' -d 'extension=ncurses'"
 		else
-			PHP_OPT+=" -d 'track_errors=1' -d 'extension_dir=./modules/' -d 'extension=ncurses'"
+			PHP_OPT+=" -d 'track_errors=1' -d 'extension_dir=./modules/' -d 'extension=ncurses.so'"
 		fi
 
 		if [[ -f tests/${3}.php ]]; then

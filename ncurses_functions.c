@@ -159,15 +159,16 @@ PHP_FUNCTION(ncurses_init)
 		WINDOW **pscr = (WINDOW**)emalloc(sizeof(WINDOW *));
 #if PHP_MAJOR_VERSION >= 7
 		zend_resource *zscr;
+		int module_number;
 
 		*pscr = stdscr;
 		zscr = zend_register_resource(pscr, le_ncurses_windows);
 		ZVAL_RES(&c.value, zscr);
 #if PHP_VERSION_ID >= 70300
-		int module_number = ZEND_CONSTANT_MODULE_NUMBER(&c);
+		module_number = ZEND_CONSTANT_MODULE_NUMBER(&c);
 		ZEND_CONSTANT_SET_FLAGS(&c, CONST_CS, module_number);
 #else
-		int module_number = c.module_number;
+		c.module_number = module_number = NCURSES_G(module_number);
 		c.flags = CONST_CS;
 #endif
 		c.name = zend_string_init("STDSCR", sizeof("STDSCR")-1, 0);
