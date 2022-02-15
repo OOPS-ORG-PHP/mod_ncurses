@@ -65,9 +65,9 @@ case "${mode}" in
 		fi
 
 		if (( $2 > 71 )); then
-			PHP_OPT+=" -d 'extension_dir=./modules/' -d 'extension=magic.so'"
+			PHP_OPT+=" -d 'extension_dir=./modules/' -d 'extension=ncurses'"
 		else
-			PHP_OPT+=" -d 'track_errors=1' -d 'extension_dir=./modules/' -d 'extension=magic.so'"
+			PHP_OPT+=" -d 'track_errors=1' -d 'extension_dir=./modules/' -d 'extension=ncurses'"
 		fi
 
 		if [[ -f tests/${3}.php ]]; then
