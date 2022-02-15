@@ -34,7 +34,7 @@ mode="${1}"
 case "${mode}" in
 	clean)
 		cat <<-EOL
-			[ -f Makefile ] && make distclean
+			${bwhite}[ -f Makefile ] && make distclean
 			rm -rf autom4te.cache build include modules
 			rm -f .deps Makefile* ac*.m4 compile tags
 			rm -f config.h* config.nice configure* config.sub config.guess
@@ -42,7 +42,7 @@ case "${mode}" in
 
 			rm -f package.xml
 			find ./tests ! -name '*.phpt' -a ! -name '*.txt' -a -type f
-			----->
+			${normal}----->
 		EOL
 
 		[ -f Makefile ] && make distclean
@@ -53,21 +53,57 @@ case "${mode}" in
 		rm -f tests/*.{diff,exp,log,out,php,sh,mem}
 		;;
 	test)
+		PHPBIN=/opt/php-qa/php${2}/bin/php
+		PHPIZE=/opt/php-qa/php${2}/bin/phpize
+		PHPCONFIG=/opt/php-qa/php${2}/bin/php-config
+		PHP_OPT="-n"
+
+		if [[ $# == 2 ]]; then
+			./manage.sh clean
+			echo "${PHPIZE} && ./configure"
+			${PHPIZE} && ./configure && make -j8 || exit 0
+		fi
+
+		if (( $2 > 71 )); then
+			PHP_OPT+=" -d 'extension_dir=./modules/' -d 'extension=magic.so'"
+		else
+			PHP_OPT+=" -d 'track_errors=1' -d 'extension_dir=./modules/' -d 'extension=magic.so'"
+		fi
+
 		if [[ -f tests/${3}.php ]]; then
-			/usr/bin/php${2} -d "extension_dir=./modules/" -d "extension=ncurses.so" tests/${3}.php
+			cat <<-EOL
+				${bgreen}------------------------------------------------------------------------
+				Sample code execution:
+
+				${bcyan}${PHPBIN} ${PHP_OPT} test/${3}.php
+				${bgreen}------------------------------------------------------------------------${normal}
+
+			EOL
+			${PHPBIN} ${PHP_OPT} test/${3}.php
 			exit $?
 		elif [[ -f ${3} ]]; then
-			/usr/bin/php${2} -d "extension_dir=./modules/" -d "extension=ncurses.so" ${3}
+			cat <<-EOL
+				${bgreen}------------------------------------------------------------------------
+				Sample code execution:
+
+				${bcyan}${PHPBIN} ${PHP_OPT} ${3}
+				${bgreen}------------------------------------------------------------------------${normal}
+
+			EOL
+			eval "${PHPBIN} ${PHP_OPT} ${3}"
 			exit $?
 		fi
 
-		if [[ -z $3 ]]; then
-			./manage.sh clean
-			echo "phpize${2} ./configure"
-			phpize${2} && ./configure --with-libdir=lib64 && make -j8 || exit 0
-		fi
-		echo "make test PHP_EXECUTABLE=/usr/bin/php${2}"
-		make test PHP_EXECUTABLE=/usr/bin/php${2} <<< n
+        cat <<-EOL
+			${bwhite}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			${tcolor}** MAKE test::                                                       ${normal}
+			${bwhite}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+			${bcyan}make test PHP_EXECUTABLE=${PHPBIN}
+			${bwhite}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~${normal}
+
+		EOL
+		make test PHP_EXECUTABLE=${PHPBIN} <<< n
 		;;
 	stub)
 		# stub tagging

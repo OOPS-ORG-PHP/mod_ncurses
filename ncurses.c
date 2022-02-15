@@ -25,6 +25,10 @@
 #include "php_ncurses.h"
 #include "ext/standard/info.h"
 
+#if PHP_VERSION_ID >= 80000
+#   include "ncurses_arginfo.h"
+#endif
+
 ZEND_DECLARE_MODULE_GLOBALS(ncurses)
 
 /* True global resources - no need for thread safety here */
