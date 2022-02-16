@@ -1,5 +1,10 @@
 # PHP Ncurses Terminal Screen Control
 
+[![PHP v3.01](https://img.shields.io/badge/license-php_v3.01-blue.svg)](http://www.php.net/license)
+[![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/OOPS-ORG-PHP/mod_ncurses.svg)](https://github.com/OOPS-ORG-PHP/mod_ncurses/issues?q=is%3Aissue+is%3Aclosed)
+![Current Version](https://img.shields.io/badge/confirmed-PHP%208.1-yellowgreen)
+
+
 ## Introduction
 
 ___ncurses___ (new curses) is a free software emulation of curses in System V Rel 4.0 (and above).
