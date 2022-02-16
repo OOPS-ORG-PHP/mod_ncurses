@@ -11,6 +11,8 @@ usage () {
 	exit 1
 }
 
+mod_name="$( grep "^ZEND_GET_MODULE" *.c | grep -Po '(?<=\()[a-z]+(?=\))' )"
+
 opts=$(getopt -u -o h -l help -- "$@")
 [ $? != 0 ] && usage
 
@@ -42,6 +44,7 @@ case "${mode}" in
 
 			rm -f package.xml
 			find ./tests ! -name '*.phpt' -a ! -name '*.txt' -a -type f
+			#rm -f *${mod_name}_arginfo.h && git checkout -- php_${mod_name}_arginfo.h
 			${normal}----->
 		EOL
 
@@ -51,6 +54,7 @@ case "${mode}" in
 		rm -f config.h* config.nice configure* config.sub config.guess
 		rm -f install-sh ltmain.sh missing mkinstalldirs run-tests.php
 		rm -f tests/*.{diff,exp,log,out,php,sh,mem}
+		#rm -f *${mod_name}_arginfo.h && git checkout -- php_${mod_name}_arginfo.h
 		;;
 	test)
 		PHPBIN=/opt/php-qa/php${2}/bin/php
@@ -65,9 +69,9 @@ case "${mode}" in
 		fi
 
 		if (( $2 > 71 )); then
-			PHP_OPT+=" -d 'extension_dir=./modules/' -d 'extension=ncurses'"
+			PHP_OPT+=" -d 'extension_dir=./modules/' -d 'extension=${mod_name}'"
 		else
-			PHP_OPT+=" -d 'track_errors=1' -d 'extension_dir=./modules/' -d 'extension=ncurses.so'"
+			PHP_OPT+=" -d 'track_errors=1' -d 'extension_dir=./modules/' -d 'extension=${mod_name}.so'"
 		fi
 
 		if [[ -f tests/${3}.php ]]; then
@@ -116,7 +120,7 @@ case "${mode}" in
 			exit 1
 		fi
 		phpcmd="/usr/bin/php80"
-		perl -pi -e 's/ext_functions/ncurses_functions/g' build/gen_stub.php
+		perl -pi -e 's/ext_functions/${mod_name}_functions/g' build/gen_stub.php
 		${phpcmd} build/gen_stub.php -f *.stub.php
 		;;
 	*)
