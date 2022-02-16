@@ -60,8 +60,8 @@ case "${mode}" in
 
 		if [[ $# == 2 ]]; then
 			./manage.sh clean
-			echo "${PHPIZE} && ./configure"
-			${PHPIZE} && ./configure && make -j8 || exit 0
+			echo "${PHPIZE} && ./configure --enable-ncursesw"
+			${PHPIZE} && ./configure --enable-ncursesw && make -j8 || exit 0
 		fi
 
 		if (( $2 > 71 )); then
