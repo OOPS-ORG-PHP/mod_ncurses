@@ -1,5 +1,5 @@
 /* This is a generated file, edit the .stub.php file instead.
- * Stub hash: 65f939de3762d9b2ec29b1a5d38da28428f70fd6 */
+ * Stub hash: 630859abe2cdb9b5b472f4b4addace007331b0a3 */
 
 #if PHP_VERSION_ID >= 80000
 
@@ -183,6 +183,11 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ncurses_bkgd, 0, 1, IS_LONG, 0)
 	ZEND_ARG_TYPE_INFO(0, attrchar, IS_LONG, 0)
 ZEND_END_ARG_INFO()
 
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ncurses_wbkgd, 0, 2, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, handle, resource, 0)
+	ZEND_ARG_TYPE_INFO(0, attrchar, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ncurses_curs_set, 0, 1, IS_LONG, 0)
 	ZEND_ARG_TYPE_INFO(0, visibility, IS_LONG, 0)
 ZEND_END_ARG_INFO()
@@ -240,6 +245,11 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ncurses_use_extended_names, 0, 1
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ncurses_bkgdset, 0, 1, IS_VOID, 0)
+	ZEND_ARG_TYPE_INFO(0, attrchar, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ncurses_wbkgdset, 0, 2, IS_VOID, 0)
+	ZEND_ARG_OBJ_INFO(0, handle, resource, 0)
 	ZEND_ARG_TYPE_INFO(0, attrchar, IS_LONG, 0)
 ZEND_END_ARG_INFO()
 
@@ -620,6 +630,7 @@ static const zend_function_entry ncurses_functions[] = {
 	ZEND_FE(ncurses_attron, arginfo_ncurses_attron)
 	ZEND_FE(ncurses_attrset, arginfo_ncurses_attrset)
 	ZEND_FE(ncurses_bkgd, arginfo_ncurses_bkgd)
+	ZEND_FE(ncurses_wbkgd, arginfo_ncurses_wbkgd)
 	ZEND_FE(ncurses_curs_set, arginfo_ncurses_curs_set)
 	ZEND_FE(ncurses_delay_output, arginfo_ncurses_delay_output)
 	ZEND_FE(ncurses_echochar, arginfo_ncurses_echochar)
@@ -644,6 +655,7 @@ static const zend_function_entry ncurses_functions[] = {
 	ZEND_FE(ncurses_use_extended_names, arginfo_ncurses_use_extended_names)
 #endif
 	ZEND_FE(ncurses_bkgdset, arginfo_ncurses_bkgdset)
+	ZEND_FE(ncurses_wbkgdset, arginfo_ncurses_wbkgdset)
 	ZEND_FE(ncurses_filter, arginfo_ncurses_filter)
 	ZEND_FE(ncurses_noqiflush, arginfo_ncurses_noqiflush)
 	ZEND_FE(ncurses_qiflush, arginfo_ncurses_qiflush)

@@ -67,6 +67,7 @@ function ncurses_attroff(int $attributes): int { }
 function ncurses_attron(int $attributes): int { }
 function ncurses_attrset(int $attributes): int { }
 function ncurses_bkgd(int $attrchar): int { }
+function ncurses_wbkgd(resource $handle, int $attrchar): int { }
 function ncurses_curs_set(int $visibility): int { }
 function ncurses_delay_output(int $milliseconds): int { }
 function ncurses_echochar(int $character): int { }
@@ -87,6 +88,7 @@ function ncurses_ungetch(int $keycode): int { }
 function ncurses_vidattr(int $intarg): int { }
 function ncurses_use_extended_names(bool $flag): int { }
 function ncurses_bkgdset(int $attrchar): void { }
+function ncurses_wbkgdset(resource $handle, int $attrchar): void { }
 function ncurses_filter(): void { }
 function ncurses_noqiflush(): int { }
 function ncurses_qiflush(): void { }
